@@ -5,7 +5,7 @@ public class Customer {
     private String customerID;
     private String customerName;
     private String customerEmail;
-    private int customerPhoneNumber;
+    private Integer customerPhoneNumber;
 
     @Override
     public String toString() {
@@ -41,15 +41,15 @@ public class Customer {
         this.customerEmail = customerEmail;
     }
 
-    public int getCustomerPhoneNumber() {
+    public Integer getCustomerPhoneNumber() {
         return customerPhoneNumber;
     }
 
-    public void setCustomerPhoneNumber(int customerPhoneNumber) {
+    public void setCustomerPhoneNumber(Integer customerPhoneNumber) {
         this.customerPhoneNumber = customerPhoneNumber;
     }
 
-    public Customer(String customerID, String customerName, String customerEmail, int customerPhoneNumber) {
+    public Customer(String customerID, String customerName, String customerEmail, Integer customerPhoneNumber) {
         this.customerID = customerID;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
