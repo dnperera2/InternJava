@@ -1,12 +1,22 @@
 package bank;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Transaction {
     private String transactionID;
     private LocalDate transactionDate;
-    private BigDecimal transactionAmount;
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "transactionID='" + transactionID + '\'' +
+                ", transactionDate=" + transactionDate +
+                ", transactionAmount=" + transactionAmount +
+                ", transactionType='" + transactionType + '\'' +
+                '}';
+    }
+
+    private double transactionAmount;
     private String transactionType;
 
     public String getTransactionID() {
@@ -25,11 +35,11 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    public BigDecimal getTransactionAmount() {
+    public double getTransactionAmount() {
         return transactionAmount;
     }
 
-    public void setTransactionAmount(BigDecimal transactionAmount) {
+    public void setTransactionAmount(double transactionAmount) {
         this.transactionAmount = transactionAmount;
     }
 
@@ -41,7 +51,7 @@ public class Transaction {
         this.transactionType = transactionType;
     }
 
-    public Transaction(String transactionID, LocalDate transactionDate, BigDecimal transactionAmount, String transactionType) {
+    public Transaction(String transactionID, LocalDate transactionDate, double transactionAmount, String transactionType) {
         this.transactionID = transactionID;
         this.transactionDate = transactionDate;
         this.transactionAmount = transactionAmount;

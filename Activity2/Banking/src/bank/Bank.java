@@ -105,8 +105,10 @@ public class Bank {
             String cusMail;
             double accBal;
             String AccType;
-            Integer accNo;
-            Integer cusPhone;
+            String accNo;
+            String cusPhone;
+            String cusID;
+
 
             //Name ===============================================
             while (true) {
@@ -118,8 +120,17 @@ public class Bank {
                 System.out.println("Try Again");
             }
 
-            System.out.println("\nEnter your ID:");
-            String cusID = sc.nextLine();
+
+            while (true) {
+                System.out.println("\nEnter your ID:");
+                cusID = sc.nextLine();
+
+                if (Pattern.matches("^[0-9]{12}$", cusID)) {  // accept 12 digit
+                    break;
+                }
+                System.out.println("Try with Correct ID (12 digits)");
+            }
+
 
             //Mail ===============================================
             while (true) {
@@ -133,35 +144,24 @@ public class Bank {
 
             //phone ===============================================
             while (true) {
-                try {
-                    System.out.println("\nEnter your Phone No:");
-                    String cusPhoneStr = sc.nextLine();
+                System.out.println("\nEnter your Phone No:");
+                cusPhone = sc.nextLine();
 
-                    if (isValidPhone(cusPhoneStr)) {
-                        cusPhone = Integer.parseInt(cusPhoneStr);
-                        break;
-                    } else {
-                        System.out.println("Try with correct number format (07########)");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid number. Please enter digits only.");
+                if (isValidPhone(cusPhone)) {
+                    break;
                 }
+                System.out.println("Try with correct number format (07########)");
             }
 
             //Account No===============================================
             while (true) {
-                try {
-                    System.out.println("\nEnter your Account No:");
-                    String accInput = sc.nextLine();
+                System.out.println("\nEnter your Account No:");
+                accNo = sc.nextLine();
 
-                    if (isValidPhone(accInput)) {  // still using phone pattern as a number check
-                        accNo = Integer.parseInt(accInput);
-                        break;
-                    }
-                    System.out.println("Try with Correct Account Number");
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid input. Please enter digits only.");
+                if (Pattern.matches("^[0-9]{6,15}$", accNo)) {  // accept 6-15 digit account numbers
+                    break;
                 }
+                System.out.println("Try with Correct Account Number (6-15 digits)");
             }
 
             //Acc Type ===============================================
@@ -201,6 +201,11 @@ public class Bank {
             boc.addCustomers(c1);
 
             boc.displayAllAccountInfo();
+
+
+            b1.bankDeposit(2300);
+            b1.bankWithdraw(200);
+            b1.displayTransaction();
 
 
 

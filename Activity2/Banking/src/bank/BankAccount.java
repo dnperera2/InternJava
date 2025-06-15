@@ -1,9 +1,11 @@
 package bank;
 
-import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class BankAccount {
-    private int accountNumber;
+    private String accountNumber;
     private String accountHolderName;
     private double accountBalance;
     private String accountType;
@@ -18,18 +20,23 @@ public class BankAccount {
                 '}';
     }
 
-    public BankAccount(int accountNumber, String accountHolderName, double accountBalance, String accountType) {
+    public BankAccount(String accountNumber, String accountHolderName, double accountBalance, String accountType) {
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
         this.accountBalance = accountBalance;
         this.accountType = accountType;
     }
 
-    public int getAccountNumber() {
+    private static int transactionCount = 0;
+    private final ArrayList<Transaction> transHistory = new ArrayList<>();
+
+
+
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(int accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
@@ -56,4 +63,58 @@ public class BankAccount {
     public void setAccountType(String accountType) {
         this.accountType = accountType;
     }
+
+    public void bankDeposit(double amt){
+        if(amt>0){
+            this.accountBalance += amt;
+
+            transHistory.add(new Transaction(
+                    UUID.randomUUID().toString(),
+                    LocalDate.now(),
+                    amt,
+                    "Deposit"
+            ));
+            transactionCount++;
+
+        }
+        else{
+            System.out.println("This transaction can not be completed.");
+            return;
+        }
+
+    }
+
+    public void bankWithdraw(double amt){
+        if(amt>0 && amt<=accountBalance){
+            this.accountBalance -= amt;
+
+            transHistory.add(new Transaction(
+                    UUID.randomUUID().toString(),
+                    LocalDate.now(),
+                    amt,
+                    "Withdraw"
+            ));
+
+            transactionCount++;
+
+
+        }
+        else{
+            System.out.println("This transaction can not be completed.");
+            return;
+        }
+    }
+
+
+    public void displayTransaction() {
+        for (Transaction t : transHistory){
+            System.out.println(t);
+    }
+        System.out.println("Final Balance : " + accountBalance);
+    }
+
+
+
+
+
 }
