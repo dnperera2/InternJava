@@ -1,11 +1,12 @@
 package test.java.bank;
 
 import bank.Bank;
+import bank.BankAccount;
+import bank.Customer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class BankTest {
@@ -31,6 +32,30 @@ public class BankTest {
     void testValidAccountType() {
         assertTrue(Bank.isvalidAcc("saving"));
         assertFalse(Bank.isvalidAcc("business"));
+    }
+
+    @Test
+    public void testAddAndRemoveAccount() {
+        Bank bank = new Bank();
+        BankAccount acc = new BankAccount("123456", "John", 5000, "saving");
+
+        bank.addAccount(acc);
+        assertEquals(1, bank.bankAccountList.size());
+
+        bank.removeAccount(acc);
+        assertEquals(0, bank.bankAccountList.size());
+    }
+
+    @Test
+    public void testAddAndRemoveCustomer() {
+        Bank bank = new Bank();
+        Customer c = new Customer("123456789012", "John", "john@example.com", "+94771234567");
+
+        bank.addCustomers(c);
+        assertEquals(1, bank.customerList.size());
+
+        bank.removeCustomers(c);
+        assertEquals(0, bank.customerList.size());
     }
 
 

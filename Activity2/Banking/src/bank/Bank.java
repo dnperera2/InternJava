@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 
 public class Bank {
 
-    private ArrayList<Customer> customerList;
-    private ArrayList<BankAccount> bankAccountList;
+    public ArrayList<Customer> customerList;
+    public ArrayList<BankAccount> bankAccountList;
 
     public Bank() {
         this.customerList = new ArrayList<>();
